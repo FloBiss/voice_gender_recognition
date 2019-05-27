@@ -1,4 +1,14 @@
 #Librairies
+install.packages("e1071")
+install.packages("tuneR")
+install.packages("seewave")
+install.packages("caTools")
+install.packages("rpart")
+install.packages("rpart.plot")
+install.packages("randomForest")
+install.packages("warbler")
+install.packages("xgboost")
+
 library(tuneR)
 library(seewave)
 library(caTools)
@@ -8,6 +18,7 @@ library(randomForest)
 library(warbleR)
 library(xgboost)
 library(e1071)
+
 
 set.seed('79')
 
