@@ -1,9 +1,12 @@
-# pi2
+﻿# pi2
 
-## Utilisation
+##Modification
+Modifier le workingdirectory dans Server.js:
+```sh
+setwd("<current directory>")
+```
 
-Dans R studio, définir le working directory
-Exécuter le code dans le fichier server.R
-Copier le port du serveur R et le coller dans le port de la variable url de app.js
-Lancer app.js
-Ouvrir localhost:8080
+##Execution
+Lancer server.R et run la totalité du code (cela lancera le serveur R)
+Ensuite faire un node app.js cela va lancer le serveur node.
+Le site web est fonctionnel sur le localhost:8080
