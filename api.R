@@ -80,15 +80,9 @@ function(gender){
   
   dataset <<- dataset[,-1]
   datasetXGB <<- dataset[,- 21]#Copie de la dataset sans la colonne label
-  datasetGLMAndRandom <<- dataset[,c(4:5,9:10,13:14,20:21)]
   datasetLabel <<- dataset$label
   datasetLabel <<- ifelse(datasetLabel == "male", 1, 0)
   
-  #Training models
-  #xgb <<- xgboost(data = data.matrix(datasetXGB), label = datasetLabel, nrounds = 25, objective="binary:logistic")
-  #model <<- glm(formula = label ~ ., family = "binomial", data = datasetGLMAndRandom)
-  #random <<- randomForest(label ~., data= datasetGLMAndRandom, ntree = 500, na.action = na.omit)
-  "done"
 }
 
 
