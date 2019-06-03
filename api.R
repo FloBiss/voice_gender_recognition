@@ -6,7 +6,7 @@ install.packages("caTools")
 install.packages("rpart")
 install.packages("rpart.plot")
 install.packages("randomForest")
-install.packages("warbler")
+install.packages("warbleR")
 install.packages("xgboost")
 
 library(tuneR)
@@ -49,26 +49,21 @@ function(){
   
   #Training models
   xgb <<- xgboost(data = data.matrix(datasetXGB), label = datasetLabel, nrounds = 25, objective="binary:logistic")
-  model <<- glm(formula = label ~ ., family = "binomial", data = datasetGLMAndRandom)
-  random <<- randomForest(label ~., data= datasetGLMAndRandom, ntree = 500, na.action = na.omit)
   
   
   
   writeCSVFromWAV()
   recordingData <<- read.csv("my_voice.csv", row.names = 1)
   recordingDataXGB <- recordingData[,-21]
-  recordingDataGLMAndRandom<-recordingData[,c(4:5,9:10,13:14,20:21)]
+  
   
   predXGB <<- predict(xgb,data.matrix(recordingDataXGB))
-  predModel <<- predict(model,recordingDataGLMAndRandom, type="response")
-  predRandom <<- predict(random,recordingDataGLMAndRandom, type="prob")
+
   
   genderXGB <<- ifelse(predXGB > 0.5, "Male", "Female")
-  genderModel <<- ifelse(predModel > 0.5, "Male", "Female")
-  genderRandom <<- ifelse(predRandom[,2] > predRandom[,1], "Male", "Female")
   
   
-  JSONresult <<- paste('{"genderXGB": "', genderXGB, '", "genderModel": "', genderModel, '", "genderRandom": "', genderRandom,'", "valXGB": ', predXGB, ', "valGLM": ', predModel, ', "valRandomM": ',predRandom[,2], ', "valRandomF":',predRandom[,1], '}' , sep = "")
+  JSONresult <<- paste('{"genderXGB": "', genderXGB,'", "valXGB": ', predXGB,'}' , sep = "")
   JSONresult
 }
 
